@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "517218339820",
+    "project_id": "slash-whisper-b88f6",
+    "storage_bucket": "slash-whisper-b88f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517218339820:android:daff98ade6832945d80ec9",
+        "android_client_info": {
+          "package_name": "com.warrennovasconeslashwhisper.phoneapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517218339820-1agt25pinv5b7v3bom0vpbil2s0qmus2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKRMkyV-5_bGvxg8_9MVDaOM-2Gsjd-bA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517218339820-1agt25pinv5b7v3bom0vpbil2s0qmus2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517218339820:android:9d7b4deeee739376d80ec9",
+        "android_client_info": {
+          "package_name": "com.warrennovasconeslashwhisper.watchapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517218339820-1agt25pinv5b7v3bom0vpbil2s0qmus2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKRMkyV-5_bGvxg8_9MVDaOM-2Gsjd-bA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517218339820-1agt25pinv5b7v3bom0vpbil2s0qmus2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,4 @@
+include ':Slash-Whisper-Watch'
+include ':API'
+include ':Slash-Whisper-Phone'
+rootProject.name = "Slash-Whisper"
