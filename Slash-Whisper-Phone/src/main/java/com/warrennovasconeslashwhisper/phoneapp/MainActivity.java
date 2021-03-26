@@ -1,6 +1,7 @@
 package com.warrennovasconeslashwhisper.phoneapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.content.Intent;
@@ -9,8 +10,11 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.warrennovasconeslashwhisper.api.Verify;
+import com.warrennovasconeslashwhisper.api.viewmodels.UserViewModel;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -19,11 +23,31 @@ public class MainActivity extends AppCompatActivity {
     public static final int RECORD_CODE = 1;
     private boolean talking = false;
 //    TextToSpeech textSpeech;
+    UserViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        viewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        EditText email = findViewById(R.id.email);
+        EditText password = findViewById(R.id.password);
+        Button signIn = findViewById(R.id.signIn);
+        Button signUp = findViewById(R.id.signUp);
+
+        signIn.setOnClickListener((view) -> {
+            viewModel.signIn(
+                    email.getText().toString(),
+                    password.getText().toString()
+            );
+        });
+
+        signUp.setOnClickListener((view) -> {
+            viewModel.signUp(
+                    email.getText().toString(),
+                    password.getText().toString()
+            );
+        });
         Verify.verifyPhoneApp();
         requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO},RECORD_CODE);
 //        textSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
@@ -101,6 +125,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        viewModel.getUser().observe(this, (user) -> {
+            System.out.println("MY USER");
+            System.out.println(user);
+        });
     }
 
 

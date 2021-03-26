@@ -15,14 +15,14 @@ import com.google.firebase.auth.FirebaseUser;
 public class UserViewModel extends ViewModel {
     FirebaseAuth auth;
     MutableLiveData<User> user = new MutableLiveData<>();
-       // MutableLiveData<RuntimeException> loginError = new MutableLiveData<>();
+    MutableLiveData<RuntimeException> loginError = new MutableLiveData<>();
     public UserViewModel() {
         this.auth = FirebaseAuth.getInstance();
         this.auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser fbUser = auth.getCurrentUser();
-                //loginError.setValue(null);
+                loginError.setValue(null);
                 if (fbUser == null) {
                     user.setValue(null);
                 } else {
@@ -37,16 +37,15 @@ public class UserViewModel extends ViewModel {
     }
 
     public void signUp(String email, String password) {
-        auth.createUserWithEmailAndPassword(email, password);
-//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<AuthResult> task) {
-//                AuthResult result = task.getResult();
-//                if (result.getUser() == null) {
-//                    loginError.setValue(new RuntimeException("Signup failed"));
-//                }
-//            }
-//        });
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                AuthResult result = task.getResult();
+                if (result.getUser() == null) {
+                    loginError.setValue(new RuntimeException("Signup failed"));
+                }
+            }
+        });
     }
 
     public void signIn(String email, String password) {
