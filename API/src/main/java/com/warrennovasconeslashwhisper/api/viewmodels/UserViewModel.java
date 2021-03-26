@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.warrennovasconeslashwhisper.api.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -12,14 +15,14 @@ import com.google.firebase.auth.FirebaseUser;
 public class UserViewModel extends ViewModel {
     FirebaseAuth auth;
     MutableLiveData<User> user = new MutableLiveData<>();
-    //    MutableLiveData<RuntimeException> loginError = new MutableLiveData<>();
+       // MutableLiveData<RuntimeException> loginError = new MutableLiveData<>();
     public UserViewModel() {
         this.auth = FirebaseAuth.getInstance();
         this.auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser fbUser = auth.getCurrentUser();
-//                loginError.setValue(null);
+                //loginError.setValue(null);
                 if (fbUser == null) {
                     user.setValue(null);
                 } else {
@@ -35,7 +38,7 @@ public class UserViewModel extends ViewModel {
 
     public void signUp(String email, String password) {
         auth.createUserWithEmailAndPassword(email, password);
-//        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 //            @Override
 //            public void onComplete(@NonNull Task<AuthResult> task) {
 //                AuthResult result = task.getResult();

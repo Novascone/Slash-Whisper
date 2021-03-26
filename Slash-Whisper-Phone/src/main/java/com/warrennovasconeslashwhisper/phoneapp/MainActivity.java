@@ -18,7 +18,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     public static final int RECORD_CODE = 1;
     private boolean talking = false;
-//    TextToSpeech textToSpeech;
+//    TextToSpeech textSpeech;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Verify.verifyPhoneApp();
         requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO},RECORD_CODE);
-//        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+//        textSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
 //            @Override
 //            public void onInit(int status) {
-//                textToSpeech.setLanguage(Locale.getDefault());
+//                textSpeech.setLanguage(Locale.getDefault());
 //            }
 //        });
 
@@ -69,15 +69,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResults(Bundle results) {
-                ArrayList<String> result = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
+                ArrayList<String> result = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 String text = result.get(0);
-                //textToSpeech.speak("", TextToSpeech.QUEUE_FLUSH, null,"text");
+                System.out.println(text);
 
             }
 
             @Override
             public void onPartialResults(Bundle partialResults) {
+
 
             }
 
