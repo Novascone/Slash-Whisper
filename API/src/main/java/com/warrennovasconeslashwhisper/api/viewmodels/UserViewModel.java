@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.warrennovasconeslashwhisper.api.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -14,10 +16,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class UserViewModel extends ViewModel {
     FirebaseAuth auth;
+    DatabaseReference database;
     MutableLiveData<User> user = new MutableLiveData<>();
     MutableLiveData<RuntimeException> loginError = new MutableLiveData<>();
     public UserViewModel() {
         this.auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance().getReference();
         this.auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -54,6 +58,12 @@ public class UserViewModel extends ViewModel {
 
     public void signOut() {
         auth.signOut();
+    }
+
+    public void storeUserSpecificData(){
+        if(user.getValue() == null) return;
+        database.child("userData").child(user.getValue().uid).child("name").setValue("My users name updated rules");
+
     }
 }
 

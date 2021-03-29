@@ -4,12 +4,11 @@
 
     <queries>
         <intent>
-            <action
-                android:name="android.speech.RecognitionService"/>
+            <action android:name="android.speech.RecognitionService" />
         </intent>
     </queries>
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -18,11 +17,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Android3200StarterApplication">
-        <activity android:name="com.warrennovasconeslashwhisper.phoneapp.MainActivity">
+        <activity android:name=".HomeActivity"></activity>
+
+        <activity android:name=".SignIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>
