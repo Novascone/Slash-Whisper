@@ -8,6 +8,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.warrennovasconeslashwhisper.api.viewmodels.UserViewModel;
 
 public class SignIn extends AppCompatActivity {

@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.warrennovasconeslashwhisper.api.Verify;
 import com.warrennovasconeslashwhisper.api.viewmodels.UserViewModel;
@@ -19,11 +22,16 @@ public class HomeActivity extends ActivityWithUser {
     public static final int RECORD_CODE = 1;
 
 
+
     private boolean talking = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO},RECORD_CODE);
+        EditText contact = findViewById(R.id.contact);
+        EditText message = findViewById(R.id.message);
+
 
         viewModel.getUser().observe(this,(user) ->{
             if(user != null)
@@ -31,7 +39,7 @@ public class HomeActivity extends ActivityWithUser {
                 viewModel.storeUserSpecificData();
             }
         });
-        requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO},RECORD_CODE);
+
         findViewById(R.id.logout_button).setOnClickListener((view) -> {
             viewModel.signOut();
         });
@@ -106,6 +114,22 @@ public class HomeActivity extends ActivityWithUser {
                 recognizer.stopListening();
             }
         });
+
+        findViewById(R.id.send).setOnClickListener((view) -> {
+            String contactToSend = contact.getText().toString();
+            String messageToSend = message.getText().toString();
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.putExtra(intent.EXTRA_EMAIL, new String[]{contactToSend});
+            intent.putExtra(Intent.EXTRA_TEXT, messageToSend);
+            intent.setType("message/rfc822");
+
+            startActivity(Intent.createChooser(intent, "Contact"));
+        });
+
+
+
+
+
     }
 
 }
