@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Android3200StarterApplication</string>
+    <string name="mapbox_access_token">pk.eyJ1Ijoibm92YXNjb25lIiwiYSI6ImNrbXdvMnJzcTBndXcydXA1Z3Vnc2c3b3QifQ.KZ-6CW3ICdLzhms5P6MIyw</string>
 </resources>
